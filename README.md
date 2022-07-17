@@ -126,10 +126,10 @@ A mock is a special kind of "test double" that allows you to examine interaction
 the system under test and its collaborators.
 
 #### AAA
-- Arrange the dependencies
-- Act out the action under test
-- Assert the expected outcome
-- 
+- **A**rrange the dependencies
+- **A**ct out the action under test
+- **A**ssert the expected outcome
+
 #### Styles of Testing
 - London style - Uses test doubles for all but immutable dependencies
 - Classical style - Uses test doubles for shared dependencies

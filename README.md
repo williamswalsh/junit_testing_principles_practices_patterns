@@ -102,11 +102,11 @@ They differ in how the point on isolation is interpreted
   - A DB is a shared and a volatile dependency.
 
 
-**Immutable dependency**
-- e.g. the number 5 or an enum value.
-- Every number 5 is identical and so can be "shared" - can be used **interchangeably**.
-- They are identified "by their content". 
-- No need to mock as the actual value can be used.
+- **Immutable dependency**
+  - e.g. the number 5 or an enum value.
+  - Every number 5 is identical and so can be "shared" - can be used **interchangeably**.
+  - They are identified "by their content". 
+  - No need to mock as the actual value can be used.
 
 
 **Private & Immutable dependency - Value Object**

@@ -109,13 +109,13 @@ They differ in how the point on isolation is interpreted
   - No need to mock as the actual value can be used.
 
 
-**Private & Immutable dependency - Value Object**
-- e.g. 5
+- **Private & Immutable dependency - Value Object**
+  - e.g. 5
 
 
-**Collaborator**
-- Is either shared or mutable
-- 
+- **Collaborator**
+  - Is either shared or mutable
+
 
 #### Test Double
 This is an object that looks and behaves like its release intended counterpart, \

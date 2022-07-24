@@ -1,22 +1,24 @@
 # JUnit Testing book - personal samples
 
-Unit tests should act as a safety net. \
-Unit tests should verify the correctness of an application. \
-The correctness of an application is defined from the requirements. \
-Code is a liability not an asset, less of it is better. \
-Unit tests class test a SUT(System Under Test) i.e. a class. \
-Unit tests need to prepare collaborators which collaborate with the SUT.
-A single unit test method only tests a MUT(Method Under Test) i.e. method of a class.
-
+Unit tests should act as a safety net.  
+Unit tests should verify the correctness of an application.  
+The correctness of an application is defined from the requirements.  
+Code is a liability not an asset, less of it is better.  
+Unit tests class test a SUT(System Under Test) i.e. a class.  
+Unit tests need to prepare collaborators which collaborate with the SUT.  
+A single unit test method only tests a MUT(Method Under Test)  
+i.e. method of a class.  
+If you have a large complicated class graph, you should break it down.  
+Avoid if statements in tests.
 
 ### Code quality indicators
-- Unit tests are a good negative indicator. \
+- Unit tests are a good negative indicator.  
   This means is that if no tests exist, that the code quality is certainly bad.  
-- Unit tests are a bad  positive indicator. \
+- Unit tests are a bad  positive indicator.  
   This means is that if a lot of tests exist, their presence alone doesn't mean that the code quality is good.
-- The same applies for code coverage. \
-  If there is no code coverage the code quality is certainly bad. \
-  If there is high code coverage the code quality is not certainly good. \
+- The same applies for code coverage.  
+  If there is no code coverage the code quality is certainly bad.  
+  If there is high code coverage the code quality is not certainly good.  
   A test suite that provides 100% coverage can be of poor quality. :-) LOL!
 
 ### The cost of a unit test:
@@ -36,8 +38,8 @@ Branch Coverage = ------------------------------------
                         Total number of branches
 </pre>
 
-Code   coverage ratio amount can be gamed easily. \
-Branch coverage ratio amount can't to game. \
+Code   coverage ratio amount can be gamed easily.  
+Branch coverage ratio amount can't to game.  
 Consider these two code fragments, for the case that the condition is always true:
 
     if (condition) {
@@ -47,32 +49,60 @@ Consider these two code fragments, for the case that the condition is always tru
     }
     vs: 
     if (condition) {good();} else {bad();}
-Both cases have a branch coverage of 50%. \
-The second case has line coverage of 100%, the first case less. \
+Both cases have a branch coverage of 50%.  
+The second case has line coverage of 100%, the first case less.  
 
-NB: Coverage metrics don't guarantee that the underlying code is tested, \
-only that it has been executed. \
-Assertions are important as they constrain the outcomes to the expected requirements. \
+NB: Coverage metrics don't guarantee that the underlying code is tested,  
+only that it has been executed.  
+Assertions are important as they constrain the outcomes to the expected requirements.  
 A test without asserts will always pass. :-D 
 
-### Unit Test definition
+### Unit Test
 - verifies a small piece of code(a unit)
 - does it quickly(relative term) - this can lead to mocking of out-of-process dependencies.
 - does it in an isolated manner i.e. a unit test should not be coupled to other tests.
   N.B.: You should be able to run the unit tests in parallel.  
+- Over-specification is an issue - as you can couple the test to the implementation detail.
+
+### Unit Test Naming
+- don't follow rigid guidelines like "<method_name>__<scenario>__<expected_result>"
+- name test as if you were describing it to a non-programmer, who is familiar with the problem domain.
+- separate words with underscores
+- don't include MUT in test name - you don't test classes - you should test behaviour
+  - You should target "the behaviour" not "the code".
+### Integration Test
+- An integration test verifies >1 unit.
+- An integration test is an automated test which doesn't meet one of the 3 criteria of a unit test:  
+  - London Style
+    - verifies a single unit(a class)
+    - does it quickly
+    - does it in isolation from other units(classes)
+  - Classical Style
+    - verifies a single unit of behaviour (1 or more classes)
+    - does it quickly
+    - does it in isolation from other tests
+- Normally requires a teardown phase - due to presence of out-of-process dependencies 
 
 ### Two Schools of testing
-Both schools follow the same definition of a unit test. \
+Both schools follow the same definition of a unit test.  
 They differ in how the point on isolation is interpreted 
 - Classical
+  - Verifies a single "unit of behaviour".  
+    e.g. When I call my dog, he comes to me
   - Unit tests are isolated from other tests.
   - A unit test is a class or a group of classes.
   - Only shared dependencies are mocked.
+  - Normally multiple tests can fail, if one fails - must troubleshoot to find the source of issue.
+  - Uses test doubles for shared dependencies
   
 - London(mocking)
   - Unit tests are isolated from their collaborators.
+  - Verifies a single "unit of code" (overly concerned with implementation)
+    e.g. When I call my dog, he raises his left leg, then his right leg
   - a unit test is a class.
   - All collaborators are mocked.
+  - Normally the failing class is obvious - only single point of failure 
+  - Uses test doubles for all but immutable dependencies
 
 
 ### Definitions
@@ -117,19 +147,50 @@ They differ in how the point on isolation is interpreted
   - Is either shared or mutable
 
 
-#### Test Double
-This is an object that looks and behaves like its release intended counterpart, \
-but it is actually simplified for testing purposes.
+- **Test Double**
+  - This is an object that looks and behaves like its release intended counterpart,  
+  but it is actually simplified for testing purposes.
 
-#### Mock
-A mock is a special kind of "test double" that allows you to examine interactions between \
-the system under test and its collaborators.
 
-#### AAA
+- **Mock**
+  - A mock is a special kind of "test double" that allows you to examine interactions between  
+  the system under test and its collaborators.
+
+
+- **End-to-end test**
+  - A subset of an integration test.
+  - Normally UI based.
+  - Normally includes out-of-process dependencies.
+  - You should run these tests last, after unit & integration.
+
+
+- **Test Fixture**
+  - An object that the test "runs against".
+  - This object needs to be in a **known fixed state**. (**fix**-ture)
+
+
+#### AAA - Arrange, Act, Assert pattern
 - **A**rrange the dependencies
+  - If this section is too large, you can move the code into a private method in class  
+    **OR** you can create a separate factory class.
+  - Patterns: Object mother & Test Data Builder.
+  - Sharing of dependency code can lead to high coupling between tests & reduces readability.
 - **A**ct out the action under test
+  - This section is normally a single line of code. 
+  - If this section is multiple lines it could indicate a problem with the public interface of the SUT.
+  - You may require the client to make 2 calls in a specific sequence to do 1 task - confusing. 
 - **A**ssert the expected outcome
+- Given-When-Then pattern is similiar to **AAA**
+- In **TDD**, you would start off at the Assert section.
+  - This is where you state what you expect from the code.
+  - What is the objective?
+- Can put comment before each section to distinguish it: // Arrange // Act // Assert
+  - Or just separate with empty lines
 
-#### Styles of Testing
-- London style - Uses test doubles for all but immutable dependencies
-- Classical style - Uses test doubles for shared dependencies
+
+#### Anti-patterns
+- Having an if statement in a test - there should be no branching.
+  - Break down test into each branch.
+  - If statements make tests harder to understand.
+- Having an Act section of a test with more than 1 line.
+- High coupling between unit tests

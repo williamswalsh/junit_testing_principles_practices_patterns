@@ -1,5 +1,4 @@
 # JUnit Testing book - personal samples
-
 Unit tests should act as a safety net.  
 Unit tests should verify the correctness of an application.  
 The correctness of an application is defined from the requirements.  
@@ -68,8 +67,12 @@ A test without asserts will always pass. :-D
 - don't follow rigid guidelines like "<method_name>__<scenario>__<expected_result>"
 - name test as if you were describing it to a non-programmer, who is familiar with the problem domain.
 - separate words with underscores
+- The name should be a statement of fact, it should not contain should, would or could
 - don't include MUT in test name - you don't test classes - you should test behaviour
   - You should target "the behaviour" not "the code".
+- You can include basic english grammar 
+
+
 ### Integration Test
 - An integration test verifies >1 unit.
 - An integration test is an automated test which doesn't meet one of the 3 criteria of a unit test:  
@@ -193,4 +196,27 @@ They differ in how the point on isolation is interpreted
   - Break down test into each branch.
   - If statements make tests harder to understand.
 - Having an Act section of a test with more than 1 line.
-- High coupling between unit tests
+- High coupling between unit tests - by way of combining the startup code without creating private well-named methods
+  - e.g. names like createStoreWithInventory(Product.X, 5), createCustomer()
+  - These methods can have parameters to make them more generic to allow them to be reused across tests 
+
+#### Invariant Violation
+When you purchase an item multiple things occur.
+- the item stock is reduced to a valid amount
+- the item is paid for  
+
+Both these tasks have to occur for a purchase to occur.  
+Therefore they should be placed into a wrapper method like purchase(ITEM.CAR, 1).  
+There shouldn't be 2 separate calls ->reduceStockOfItem() then payForItem() exposed to the client.  
+You shouldn't allow the client to make a mistake.   
+You shouldn't rely on the client to not make a mistake.    
+What happens when one of the methods isn't called.  
+This leads to corrupt/inconsistent data in system.  
+
+#### Parameterised Tests
+Use these when the only difference is between existing tests is a variable value.
+Can group tests using parameterised tests.  
+Can pass in input and expected outcome(true|false) into parameterised test.  
+However passing the outcome can make thinks harder to understand.  
+So a compromise would be to group all failing tests and only pass in the failure causing parameters.
+Also group all succeeding cases.

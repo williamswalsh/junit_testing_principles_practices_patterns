@@ -22,6 +22,33 @@ Focus on the outcome.
 The test should tell a story about the problem domain.  
 Aim at the result instead of the implementation details
 
+#### Fast feedback
+#### Maintainability
+
+#### Categorizing test types by the four pillars
+- End-to-end tests
+  - Test all code so they protect against regressions
+  - Normally focus on the outcome from the end users point of view -> resistant to refactoring  
+  - They are SLOW
+- Trivial test - test that is so trivial it is unlikely to ever break
+  - e.g. testing a setter or getter of a class member
+  - They are FAST
+  - Unlikely to reveal any regression
+  - Unlikely to produce false positive -> Good resistance to refactoring
+### Definitions
+
+#### Test Accuracy
+<pre>
+                   Number of bugs found             
+  Test accuracy = ----------------------
+                  Number of false alarms
+</pre>
+
+#### Test Value Estimate - using four pillars
+<pre> 
+     Test value = [0-10] * [0-10] * [0-10] * [0-10]
+</pre>
+
 #### Regression
 - A software bug which occurs when a feature stops working due to a modification to existing code.
 

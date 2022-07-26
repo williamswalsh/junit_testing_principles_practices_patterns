@@ -2,7 +2,7 @@
 Unit tests should act as a safety net.  
 Unit tests should verify the correctness of an application.  
 The correctness of an application is defined from the requirements.  
-Code is a liability not an asset, less of it is better.  
+N.B.: Code is a liability not an asset, less of it is better.  
 Unit tests class test a SUT(System Under Test) i.e. a class.  
 Unit tests need to prepare collaborators which collaborate with the SUT.  
 A single unit test method only tests a MUT(Method Under Test)  

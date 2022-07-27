@@ -34,8 +34,20 @@ Aim at the result instead of the implementation details
   - e.g. testing a setter or getter of a class member
   - They are FAST
   - Unlikely to reveal any regression
-  - Unlikely to produce false positive -> Good resistance to refactoring
+  - Unlikely to produce false positive as its so simple -> Good resistance to refactoring
+- Brittle test - throws a lot of false positives
+  - Runs fast
+  - It can't withstand a refactoring of the SUT.
+  - Good chance of catching a regression
+    - but does so with a lot of false positives
+
 ### Definitions
+
+#### CAP Theorem - Similar to 3 of the 4 pillars
+- It is impossible for a distributed datastore to provide more than 2 of the following 3 guarantees:
+  - C - Consistency - Every read receives the latest write or an error.
+  - A - Availability - every request receives a response.
+  - P - Partition Tolerance - system continues to operate despite network partitioning(losing connections between nodes).
 
 #### Test Accuracy
 <pre>

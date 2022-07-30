@@ -23,6 +23,15 @@ Breaking behaviour down into 2 types of actions:
 
 This makes code a lot easier to understand, just by reading the method signature.
 
+#### Well designed API
+It only exposes required operations and state.  
+If implementation details are exposed, this is called a leaky API.  
+One way to fix this in code is giving "private" implementation methods the private access modifier.  
+One way of identifying a badly designed API is by having to call more than one method to achieve a single task.  
+**Clean API:** changeWheel()  
+**Leaky API:** removeWheelFromCar(), removeTyreFromWheel(), addNewTyreToWheel(), attachWheelToCar()  
+
+
 #### Over specification
 Verifying things that aren't part of the end result.  
 e.g. Asserting interactions with stubs

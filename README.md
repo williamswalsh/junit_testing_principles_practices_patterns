@@ -200,6 +200,7 @@ They differ in how the point on isolation is interpreted
   - e.g. names like createStoreWithInventory(Product.X, 5), createCustomer()
   - These methods can have parameters to make them more generic to allow them to be reused across tests 
 - Asserting interactions with stubs - fragile tests
+- Leaking implementation details into the apps public API
 
 #### Invariant Violation
 When you purchase an item multiple things occur.

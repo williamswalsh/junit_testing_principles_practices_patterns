@@ -21,6 +21,8 @@ Breaking behaviour down into 2 types of actions:
 - queries  - these return a value and cause no side affects.
 - commands - these don't return a value and cause side affects.
 
+This makes code a lot easier to understand, just by reading the method signature.
+
 #### Over specification
 Verifying things that aren't part of the end result.  
 e.g. Asserting interactions with stubs

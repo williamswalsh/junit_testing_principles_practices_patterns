@@ -23,7 +23,16 @@ The test should tell a story about the problem domain.
 Aim at the result instead of the implementation details
 
 #### Fast feedback
+This is how fast the test executes.  
+The faster the tests the faster the test suite is, the more often the tests will be executed.  
+This means the code change between test suite execution will be small, leading to faster regression fixing.  
+
 #### Maintainability
+- How easily is the test understood?
+- How large is the test?
+- How many out-of-process dependencies are involved?
+- End-to-end tests are by their nature harder to maintain - leading to a greater cost.
+
 
 #### Categorizing test types by the four pillars
 - End-to-end tests

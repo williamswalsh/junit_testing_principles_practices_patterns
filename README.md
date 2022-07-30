@@ -199,6 +199,7 @@ They differ in how the point on isolation is interpreted
 - High coupling between unit tests - by way of combining the startup code without creating private well-named methods
   - e.g. names like createStoreWithInventory(Product.X, 5), createCustomer()
   - These methods can have parameters to make them more generic to allow them to be reused across tests 
+- Asserting interactions with stubs - fragile tests
 
 #### Invariant Violation
 When you purchase an item multiple things occur.

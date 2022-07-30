@@ -16,7 +16,10 @@ Stubs perform incoming interactions.
 They control the input.  
 e.g. Stubs will provide data to a SUT for processing. 
 
-
+#### CQS - Command Query Segregation
+Breaking behaviour down into 2 types of actions:
+- queries  - these return a value and cause no side affects.
+- commands - these don't return a value and cause side affects.
 
 #### Over specification
 Verifying things that aren't part of the end result.  

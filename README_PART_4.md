@@ -53,11 +53,15 @@ Mocks emulate and examine implementation details.
   - You provide an input, and you verify the output from the SUT
   - This approach assumes there are no side effects
   - also called functional testing - side-effect-free programming
+  - e.g. assertEquals(5, returnedResult)
 - state based
   - verifying the state of the system after an operation
   - tests verify the "final" state
   - not verifying the return value(functional testing)
+  - e.g. assertEquals(1, sut.productsList.length)
 - communication based
+  - mocks used to verify interactions between SUT and collaborators
+  - e.g. verify(x.sendGreetingEmail(anyString())).called(Times.ONCE)
 
 Output based produces tests of the highest quality.  
 State based is 2nd best.  

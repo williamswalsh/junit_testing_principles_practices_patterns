@@ -201,6 +201,8 @@ They differ in how the point on isolation is interpreted
   - These methods can have parameters to make them more generic to allow them to be reused across tests 
 - Asserting interactions with stubs - fragile tests
 - Leaking implementation details into the apps public API
+- Code Pollution - adding code whose sole purpose is to enable or simplify a unit test.
+
 
 #### Invariant Violation
 When you purchase an item multiple things occur.

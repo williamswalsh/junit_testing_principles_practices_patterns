@@ -7,6 +7,7 @@ An app consists of 2 layers:
 - the application services layer
   - This is where the app communicates with out-of-process dependencies e.g. db, email, s3, msg bus, q
   - No domain logic here
+  - This layer should depend on classes in the domain layer
 
 There is a separation of concerns between domain other parts of app.  
 Business logic should be exempted from all other responsibilities.  
@@ -36,5 +37,29 @@ Communications with this system is not part of the systems observable behaviour.
 It is therefore an implementation detail and should not be mocked.  
 For an out-of-process private dependency there is no need to consider backward compatibility with other systems as it is not part of the systems observable behaviour.  
 
+#### Mocks
+Mocks are said to verify behaviour, they don't.  
+Mocks verify implementation details between classes.  
+Mocks emulate and examine implementation details.  
 
+#### Code can be split into 4 
+- public API - observable behaviour
+- private API - observable behaviour
+- public API - implementation detail
+- private API - implementation detail
+
+#### Styles of unit tests
+- output based
+  - You provide an input, and you verify the output from the SUT
+  - This approach assumes there are no side effects
+  - also called functional testing - side-effect-free programming
+- state based
+  - verifying the state of the system after an operation
+  - tests verify the "final" state
+  - not verifying the return value(functional testing)
+- communication based
+
+Output based produces tests of the highest quality.  
+State based is 2nd best.  
+Comm. based should only be used occasionally.  
 

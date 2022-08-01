@@ -54,6 +54,7 @@ Mocks emulate and examine implementation details.
   - This approach assumes there are no side effects
   - also called functional testing - side-effect-free programming
   - e.g. assertEquals(5, returnedResult)
+  - return values can be immutable value objects
 - state based
   - verifying the state of the system after an operation
   - tests verify the "final" state

@@ -97,6 +97,7 @@ They differ in how the point on isolation is interpreted
   - Only shared dependencies are mocked.
   - Normally multiple tests can fail, if one fails - must troubleshoot to find the source of issue.
   - Uses test doubles for shared dependencies
+  - Prefers state based testing over communication based testing.
   
 - London(mocking)
   - Unit tests are isolated from their collaborators.
@@ -106,6 +107,7 @@ They differ in how the point on isolation is interpreted
   - All collaborators are mocked.
   - Normally the failing class is obvious - only single point of failure 
   - Uses test doubles for all but immutable dependencies
+  - Prefers communication based testing over state based testing.
 
 
 ### Definitions

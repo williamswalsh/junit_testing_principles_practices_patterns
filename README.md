@@ -193,11 +193,14 @@ They differ in how the point on isolation is interpreted
   - Or just separate with empty lines
 
 
-#### Anti-patterns
+#### Anti-patterns/Code Smells
+An anti-pattern is a common solution to a recurring problem that looks appropriate on the surface but leads to problems further down the road.
+
 - Having an if statement in a test - there should be no branching.
   - Break down test into each branch.
   - If statements make tests harder to understand.
 - Having an Act section of a test with more than 1 line.
+- Having multiple Arrange, Act, Assert sections in a test - testing more than 1 thing. 
 - High coupling between unit tests - by way of combining the startup code without creating private well-named methods
   - e.g. names like createStoreWithInventory(Product.X, 5), createCustomer()
   - These methods can have parameters to make them more generic to allow them to be reused across tests 
